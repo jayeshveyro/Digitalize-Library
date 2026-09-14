@@ -1,12 +1,6 @@
 # 📚 Smart Library Management System
 
-A smart, low-cost library management system that combines RFID, barcode scanning, and an ESP32 to make issuing and returning books faster, more organized, and easier to track.
-The system links a student's RFID ID card with the barcode of a library book, allowing the library to keep track of who has borrowed which book.
-
-## 🎯 Project Goal
-
-The goal of this project is to demonstrate how embedded systems, RFID, barcode technology, and software can be combined to build a practical library automation system.
-It is designed to be affordable enough for schools while providing a foundation that can later be expanded into a complete digital library platform.
+A ESP32 based book issuing project. The project makes use of rfid cards to for library cards and a barcode scanner for uploading the books into the database. The rfid library card allows hassle-free issuing and returing of book.
 
 ## 🛠️ Hardware Components
 
