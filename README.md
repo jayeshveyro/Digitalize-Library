@@ -73,5 +73,9 @@ It is designed to be affordable enough for schools while providing a foundation 
 | 8 | Barcode Scanner | HeleTT HT410, 1D + 2D/QR, Wired USB | 1 | ₹1,650 | ₹1,650 |
 | | | **Grand Total** | | | **₹3,028** |
 
+## Rough Sketch for CAD design
+<img width="1037" height="1600" alt="rough sketch 3d design" src="https://github.com/user-attachments/assets/1354487a-9e8a-44d1-866e-d59c81d77c2c" />
+
+
 
 	
