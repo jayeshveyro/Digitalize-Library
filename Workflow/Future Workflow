@@ -1,0 +1,7 @@
+RFID Card ──┐
+            │
+Barcode ────┼──► ESP32 Terminal ──► Backend API ──► Database
+            │                              │
+Buttons ────┘                              ▼
+                                      Librarian
+                                       Dashboard
