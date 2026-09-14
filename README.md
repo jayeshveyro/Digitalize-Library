@@ -8,6 +8,18 @@ The system links a student's RFID ID card with the barcode of a library book, al
 The goal of this project is to demonstrate how embedded systems, RFID, barcode technology, and software can be combined to build a practical library automation system.
 It is designed to be affordable enough for schools while providing a foundation that can later be expanded into a complete digital library platform.
 
+## 🛠️ Hardware Components
+
+| Component           | Purpose                  |
+| ------------------- | ------------------------ |
+| ESP32               | Main controller          |
+| RC522 RFID Reader   | Reads student RFID cards |
+| ILI9341 TFT Display | Displays system status   |
+| USB Barcode Scanner | Reads book barcodes      |
+| Push Buttons ×2     | Issue / Return selection |
+| Buzzer              | Audio feedback           |
+| RFID Cards/Tags     | Student identification   |
+
 ## Pin Connections
 
 ### RC522 RFID
