@@ -49,7 +49,7 @@ It is designed to be affordable enough for schools while providing a foundation 
 | SCK / CLK  | GPIO 18 |
 | LED / BL   | 3.3V    |
 
-###Controls
+### Controls
 
 | Component     | ESP32   |
 | ------------- | ------- |
