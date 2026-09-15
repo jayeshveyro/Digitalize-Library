@@ -1,8 +1,8 @@
-# 📚 Smart Library Management System
+#  Digitalize Library 
 
-A ESP32 based book issuing project. The project makes use of rfid cards to for library cards and a barcode scanner for uploading the books into the database. The rfid library card allows hassle-free issuing and returing of book.
+The project makes use of rfid cards  for library cards and a barcode scanner for uploading the books into the database. The rfid library card allows hassle-free issuing and returing of book.
 
-## 🛠️ Hardware Components
+##  Hardware Components
 
 | Component           | Purpose                  |
 | ------------------- | ------------------------ |
