@@ -2,21 +2,13 @@
 #include <MFRC522.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
-
-// =====================================================
-// PIN CONFIGURATION
-// =====================================================
-
-// RC522
 #define RFID_SS   5
 #define RFID_RST  22
-
-// ILI9341
 #define TFT_CS    17
 #define TFT_DC    16
 #define TFT_RST   21
 
-// Other hardware
+
 #define BUZZER    25
 #define ISSUE_BTN 26
 #define RETURN_BTN 27
@@ -26,10 +18,6 @@
 #define SPI_MISO  19
 #define SPI_MOSI  23
 
-// =====================================================
-// OBJECTS
-// =====================================================
-
 MFRC522 rfid(RFID_SS, RFID_RST);
 
 Adafruit_ILI9341 tft(
@@ -38,9 +26,6 @@ Adafruit_ILI9341 tft(
   TFT_RST
 );
 
-// =====================================================
-// DATA STRUCTURES
-// =====================================================
 
 struct Student {
   String uid;
@@ -55,30 +40,14 @@ struct Book {
   String issuedTo;
 };
 
-
-// =====================================================
-// STUDENTS
-// CHANGE THESE TO YOUR TEST CARDS
-// =====================================================
-
 Student students[] = {
 
    {"43:A7:2C:19", "Test Student", "Class 10"},
-
-  // Add more:
-  // {"AA:BB:CC:DD", "Student 2", "Class 9"},
-  // {"11:22:33:44", "Student 3", "Class 8"}
 
 };
 
 const int studentCount =
   sizeof(students) / sizeof(students[0]);
-
-
-// =====================================================
-// BOOKS
-// CHANGE THESE TO YOUR TEST BOOK BARCODES
-// =====================================================
 
 Book books[] = {
 
@@ -92,11 +61,6 @@ Book books[] = {
   const int bookCount =
   sizeof(books) / sizeof(books[0]);
 
-  // =====================================================
-// VARIABLES
-// =====================================================
-
-String currentStudent = "";
 String currentStudentName = "";
 
 enum Mode {
@@ -106,10 +70,6 @@ enum Mode {
 };
 
 Mode currentMode = SELECT_MODE;
-
-// =====================================================
-// SETUP
-// =====================================================
 
 void setup() {
 
@@ -151,15 +111,7 @@ void setup() {
   Serial.println("Tap RFID card...");
 }
 
-// =====================================================
-// MAIN LOOP
-// =====================================================
-
 void loop() {
-
-  // ---------------------------------------------------
-  // MODE BUTTONS
-  // ---------------------------------------------------
 
   if (digitalRead(ISSUE_BTN) == LOW) {
     currentMode = ISSUE_MODE;
@@ -189,10 +141,6 @@ void loop() {
     return;
   }
 
-  // ---------------------------------------------------
-  // SERIAL BARCODE TESTING
-  // ---------------------------------------------------
-
     if (Serial.available()) {
     String barcode = Serial.readStringUntil('\n');
     barcode.trim();
@@ -204,10 +152,6 @@ void loop() {
   }
    delay(50);
 }
-
-// =====================================================
-// STARTUP SCREEN
-// =====================================================
 
 void showStartup() {
   tft.fillScreen(ILI9341_BLACK);
@@ -222,10 +166,6 @@ void showStartup() {
   tft.println("SYSTEM");
   beep(1);
 }
-
-// =====================================================
-// HOME SCREEN
-// =====================================================
 
 void showHome() {
   tft.fillScreen(ILI9341_BLACK);
@@ -249,10 +189,6 @@ void showHome() {
   tft.println("an operation");
 }
 
-// =====================================================
-// MODE SCREEN
-// =====================================================
-
 void showMode(String mode) {
   tft.fillScreen(ILI9341_BLACK);
   tft.setTextColor(ILI9341_WHITE);
@@ -268,10 +204,6 @@ void showMode(String mode) {
   tft.setCursor(85, 180);
   tft.println("Waiting...");
 }
-
-// =====================================================
-// WAIT FOR STUDENT RFID
-// =====================================================
 
 void waitForStudent() {
   Serial.println();
@@ -310,10 +242,6 @@ void waitForStudent() {
       beepSuccess();
       delay(1800);
 
-      // ------------------------------------------------
-      // NOW WAIT FOR BARCODE
-      // ------------------------------------------------
-
       if (currentMode == ISSUE_MODE) {
         showScanBook("SCAN BOOK");
         Serial.println();
@@ -328,7 +256,7 @@ void waitForStudent() {
         Serial.println(currentStudentName);
         Serial.println("Scan/enter returned book barcode...");
       }
-      // Wait until barcode is entered
+      
       while (true) {
         if (Serial.available()) {
           String barcode =
@@ -345,10 +273,6 @@ void waitForStudent() {
     delay(50);
   }
 }
-
-// =====================================================
-// GET RFID UID
-// =====================================================
 
 String getUID() {
   String uid = "";
@@ -370,10 +294,6 @@ String getUID() {
   return uid;
 }
 
-// =====================================================
-// FIND STUDENT
-// =====================================================
-
 int findStudent(String uid) {
   uid.toUpperCase();
   for (int i = 0; i < studentCount; i++) {
@@ -387,10 +307,6 @@ int findStudent(String uid) {
   return -1;
 }
 
-// =====================================================
-// FIND BOOK
-// =====================================================
-
 int findBook(String barcode) {
   for (int i = 0; i < bookCount; i++) {
     if (books[i].barcode == barcode) {
@@ -400,21 +316,11 @@ int findBook(String barcode) {
   return -1;
 }
 
-// =====================================================
-// PROCESS BOOK BARCODE
-// =====================================================
-
 void processBarcode(String barcode) {
   Serial.println();
   Serial.print("Processing barcode: ");
   Serial.println(barcode);
   int bookIndex = findBook(barcode);
-
-
-
-  // ---------------------------------------------------
-  // BOOK NOT FOUND
-  // ---------------------------------------------------
 
   if (bookIndex == -1) {
     showError("Book Not Found");
@@ -425,18 +331,10 @@ void processBarcode(String barcode) {
     return;
   }
 
-   // ---------------------------------------------------
-  // ISSUE
-  // ---------------------------------------------------
-
   if (currentMode == ISSUE_MODE) {
     issueBook(bookIndex);
     return;
   }
-
-  // ---------------------------------------------------
-  // RETURN
-  // ---------------------------------------------------
 
   if (currentMode == RETURN_MODE) {
     returnBook(bookIndex);
@@ -444,15 +342,10 @@ void processBarcode(String barcode) {
   }
 }
 
-// =====================================================
-// ISSUE BOOK
-// =====================================================
-
 void issueBook(int bookIndex) {
   Book &book = books[bookIndex];
 
 
-  // Already issued
   if (book.issued) {
     showError("Already Issued");
 
@@ -467,8 +360,6 @@ void issueBook(int bookIndex) {
     return;
   }
 
-
-  // Issue
   book.issued = true;
   book.issuedTo = currentStudent;
 
@@ -493,15 +384,9 @@ void issueBook(int bookIndex) {
   showHome();
 }
 
-// =====================================================
-// RETURN BOOK
-// =====================================================
-
 void returnBook(int bookIndex) {
   Book &book = books[bookIndex];
 
-
-  // Book isn't issued
   if (!book.issued) {
     showError("Not Issued");
 
@@ -514,7 +399,6 @@ void returnBook(int bookIndex) {
     return;
   }
 
-  // Make sure the same student is returning it
   if (book.issuedTo != currentStudent) {
     showError("Wrong Student");
 
@@ -527,7 +411,6 @@ void returnBook(int bookIndex) {
     return;
   }
 
-  // Return
   book.issued = false;
   book.issuedTo = "";
 
@@ -550,10 +433,6 @@ void returnBook(int bookIndex) {
   showHome();
 }
 
-// =====================================================
-// STUDENT DISPLAY
-// =====================================================
-
 void showStudent(
   String name,
   String className
@@ -573,10 +452,6 @@ void showStudent(
   tft.println("Card accepted");
 }
 
-// =====================================================
-// SCAN BOOK DISPLAY
-// =====================================================
-
 void showScanBook(String title) {
   tft.fillScreen(ILI9341_BLACK);
   tft.setTextColor(ILI9341_WHITE);
@@ -592,10 +467,6 @@ void showScanBook(String title) {
   tft.setCursor(75, 190);
   tft.println("Waiting for barcode...");
 }
-
-// =====================================================
-// SUCCESS DISPLAY
-// =====================================================
 
 void showSuccess(
   String title,
@@ -616,10 +487,6 @@ void showSuccess(
   tft.println("Transaction complete");
 }
 
-// =====================================================
-// ERROR DISPLAY
-// =====================================================
-
 void showError(String message) {
   tft.fillScreen(ILI9341_BLACK);
   tft.setTextColor(ILI9341_WHITE);
@@ -631,20 +498,12 @@ void showError(String message) {
   tft.println(message);
 }
 
-// =====================================================
-// RESET SESSION
-// =====================================================
-
 void resetSession() {
 
   currentStudent = "";
   currentStudentName = "";
   currentMode = SELECT_MODE;
 }
-
-// =====================================================
-// BUZZER
-// =====================================================
 
 void beep(int count) {
   for (int i = 0; i < count; i++) {
