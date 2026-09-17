@@ -14,44 +14,6 @@ The project makes use of rfid cards  for library cards and a barcode scanner for
 | Buzzer              | Audio feedback           |
 | RFID Cards/Tags     | Student identification   |
 
-## Pin Connections
-
-### RC522 RFID
-
-| RC522    | ESP32         |
-| -------- | ------------- |
-| VCC      | 3.3V          |
-| GND      | GND           |
-| SDA / SS | GPIO 5        |
-| SCK      | GPIO 18       |
-| MOSI     | GPIO 23       |
-| MISO     | GPIO 19       |
-| RST      | GPIO 22       |
-| IRQ      | Not connected |
-
-### ILI9341 TFT
-
-| TFT        | ESP32   |
-| ---------- | ------- |
-| VCC        | 3.3V    |
-| GND        | GND     |
-| CS         | GPIO 17 |
-| RST        | GPIO 21 |
-| DC / RS    | GPIO 16 |
-| MOSI / SDI | GPIO 23 |
-| MISO / SDO | GPIO 19 |
-| SCK / CLK  | GPIO 18 |
-| LED / BL   | 3.3V    |
-
-### Controls
-
-| Component     | ESP32   |
-| ------------- | ------- |
-| Issue Button  | GPIO 26 |
-| Return Button | GPIO 27 |
-| Buzzer +      | GPIO 25 |
-| Buzzer −      | GND     |
-
 <img width="3000" height="2676" alt="circuit_image (1)" src="https://github.com/user-attachments/assets/d24124ea-c855-4e1d-ac9b-c65cacb45949" />
 
 ## Bill Of Materials
@@ -68,7 +30,3 @@ The project makes use of rfid cards  for library cards and a barcode scanner for
 | | | **Grand Total** | | | **₹3,028** |
 ## Rough Sketch for CAD design
 <img width="1037" height="1600" alt="rough sketch 3d design" src="https://github.com/user-attachments/assets/1354487a-9e8a-44d1-866e-d59c81d77c2c" />
-
-
-
-	
