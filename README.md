@@ -25,7 +25,7 @@ The project makes use of rfid cards  for library cards and a barcode scanner for
 ## CAD design
 <img width="1037" height="1600" alt="rough sketch 3d design" src="https://github.com/user-attachments/assets/1354487a-9e8a-44d1-866e-d59c81d77c2c"> 
   
-![image.png](https://cdn.hackclub.com/01a0c52b-1055-7d22-aeb9-6e7125dd740a/image.png)
+
 
 ![image.png](https://cdn.hackclub.com/01a1f632-55cf-7d0f-a799-4962b952b019/image.png)
 
